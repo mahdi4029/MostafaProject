@@ -1,0 +1,36 @@
+﻿@model List<Book>
+
+@{
+    ViewData["Title"] = "صفحه اصلی";
+}
+
+<div class="text-center">
+    <h1 class="display-4">خوش آمدید</h1>
+    <p> در این کتابخانه میتوانید کتاب مورد نظر خودتون رو مطالعه بفرمایید</p>
+</div>
+
+<table class="table table-bordered">
+
+    <tr>
+        <td>نام کتاب</td>
+        <td>نویسنده کتاب</td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @if (MostafaProject.Const.Auth.Name == "")
+            {
+                <td><a asp-controller="Register" asp-action="Register">@item.BookName</a></td>
+                <td>@item.Author</td>
+            }
+            else
+            {
+                <td><a asp-controller="Home" asp-action="DetailBook" asp-route-name="@item.BookName">@item.BookName</a></td>
+                <td>@item.Author</td>
+            }
+
+        </tr>
+    }
+
+</table>
