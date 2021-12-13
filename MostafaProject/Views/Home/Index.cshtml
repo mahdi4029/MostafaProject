@@ -21,7 +21,7 @@
         <tr>
             @if (MostafaProject.Const.Auth.Name == "")
             {
-                <td><a asp-controller="Register" asp-action="Register">@item.BookName</a></td>
+                <td><a asp-controller="Register" asp-action="Register" asp-route-id="@item.Id">@item.BookName</a></td>
                 <td>@item.Author</td>
             }
             else

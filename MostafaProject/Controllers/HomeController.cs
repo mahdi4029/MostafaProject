@@ -8,30 +8,35 @@ namespace MostafaProject.Controllers
     {
 
 
-        List<Book> books = new List<Book> {
-
-            new Book { BookName = "داستانی" , Author = "مصطفی",Description = "این کتاب مربوط به داستان های جذاب دوران قاجار است",Price = 15000},
-            new Book { BookName = "سیاسی" , Author = "مصطفی",Description = "این کتاب مربوط به سیاست های غلط رضاخان هست",Price = 20000},
-            new Book { BookName = "اجتماعی" , Author = "مصطفی",Description = "این کتاب درباره موضوعات اجتماعی دولت شاه است",Price = 30000},
-
-            };
+        
 
         public IActionResult Index()
         {
 
-            return View(books);
+            return View(MostafaProject.Const.Books.books.Where(p=>p.IsDelete == true).ToList());
         }
 
-        public IActionResult DetailBook(String name)
+        public IActionResult DetailBook(string? name)
         {
-            var book = books.FirstOrDefault(x => x.BookName == name);
 
-            return View(book);
+            if (MostafaProject.Const.BuyId.Id != 0)
+            {
+                var bookName = MostafaProject.Const.Books.books.FirstOrDefault(p=>p.Id==MostafaProject.Const.BuyId.Id).BookName;
+
+                var book = MostafaProject.Const.Books.books.FirstOrDefault(x => x.BookName == bookName);
+                return View(book);
+            }
+            else
+            {
+                var book = MostafaProject.Const.Books.books.FirstOrDefault(x => x.BookName == name);
+                return View(book);
+            }
+             
         }
 
         public IActionResult Success(string name)
         {
-            var book = books.FirstOrDefault(x => x.BookName == name);
+            var book = MostafaProject.Const.Books.books.FirstOrDefault(x => x.BookName == name);
 
             return View(book);
         }

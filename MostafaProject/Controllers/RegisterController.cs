@@ -8,9 +8,9 @@ namespace MostafaProject.Controllers
     {
         User _user = new User();
 
-        public IActionResult Register()
+        public IActionResult Register(int id)
         {
-            ViewBag.Auth = "ثبت نام";
+            MostafaProject.Const.BuyId.Id = id;
             return View();
         }
 
@@ -29,7 +29,7 @@ namespace MostafaProject.Controllers
                 MostafaProject.Const.Auth.Mobile = _user.Mobile;
                 MostafaProject.Const.Auth.PassWord = _user.PassWrod;
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("DetailBook" ,"Home");
             }
 
             return View(user);
