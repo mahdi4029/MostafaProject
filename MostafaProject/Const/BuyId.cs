@@ -2,6 +2,6 @@
 {
     public static class BuyId
     {
-        public static int Id { get; set; }
+        public static int? Id { get; set; }
     }
 }

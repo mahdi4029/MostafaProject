@@ -19,17 +19,23 @@ namespace MostafaProject.Controllers
         public IActionResult DetailBook(string? name)
         {
 
-            if (MostafaProject.Const.BuyId.Id != 0)
+            if (MostafaProject.Const.BuyId.Id != null)
             {
                 var bookName = MostafaProject.Const.Books.books.FirstOrDefault(p=>p.Id==MostafaProject.Const.BuyId.Id).BookName;
+                MostafaProject.Const.BuyId.Id = null;
 
                 var book = MostafaProject.Const.Books.books.FirstOrDefault(x => x.BookName == bookName);
                 return View(book);
             }
-            else
+            else if(name != null)
             {
                 var book = MostafaProject.Const.Books.books.FirstOrDefault(x => x.BookName == name);
                 return View(book);
+            }
+            else
+            {
+                
+                return RedirectToAction("Index");
             }
              
         }
@@ -37,6 +43,8 @@ namespace MostafaProject.Controllers
         public IActionResult Success(string name)
         {
             var book = MostafaProject.Const.Books.books.FirstOrDefault(x => x.BookName == name);
+            MostafaProject.Const.BuyCount.Count++;
+            MostafaProject.Const.Basket.Baskets.Add(book);
 
             return View(book);
         }

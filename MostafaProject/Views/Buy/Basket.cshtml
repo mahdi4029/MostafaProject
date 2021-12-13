@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MostafaProject.Models.Book>
+
+@{
+    ViewData["Title"] = "Basket";
+}
+
+<h1>Basket</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if  (MostafaProject.Const.Basket.Baskets != null)
+            {
+                foreach (var item in Model)
+        
+                       {
+                                <tr>
+                                    
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.BookName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Price)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                    </td>
+                    </tr>
+
+
+                }
+
+            }
+            else
+            {
+                <tr>
+                
+                    <td></td>
+                    <td></td>
+                
+                </tr>
+            }
+        }
+    </tbody>
+</table>
